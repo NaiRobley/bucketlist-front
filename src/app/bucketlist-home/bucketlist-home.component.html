@@ -1,0 +1,16 @@
+<section class="main" *ngIf="bucketlists.length > 0">
+
+  <div class="row">
+
+  <ul class="bucketlists-list">
+    <li *ngFor="let bucketlist of bucketlists">
+      <div class="view">
+        <app-bucketlist-single [bucketlist]="bucketlist" (remove)="onRemoveBucketList($event)"></app-bucketlist-single>
+
+      </div>
+    </li>
+  </ul>
+
+  </div>
+
+</section>
