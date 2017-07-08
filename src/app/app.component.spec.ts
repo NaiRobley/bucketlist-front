@@ -1,4 +1,10 @@
 import { TestBed, async } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+
+import { ApiService } from './api.service';
+import { ApiMockService } from './api-mock.service';
+
+import { BucketListService } from './bucket-list.service';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
@@ -12,6 +18,16 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+    providers: [
+      BucketListService,
+      {
+        provide: ApiService,
+        useClass: ApiMockService
+      }
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     }).compileComponents();
   }));
 
