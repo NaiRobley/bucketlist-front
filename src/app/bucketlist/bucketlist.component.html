@@ -1,0 +1,31 @@
+<section class="bucketlistapp">
+
+    <header class="header">
+      <input class="new-bucketlist" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newBucketList.name" (keyup.enter)="addBucketList()">
+    </header>
+
+    <section class="main" *ngIf="bucketlists.length > 0">
+
+      <div class="row">
+
+          <div class="col s12 cards-container">
+              <ul class="bucketlists-list">
+                <li *ngFor="let bucketlist of bucketlists" style="padding: 0; margin: 0;">
+                  <!-- <div class="view"> -->
+                    <app-bucket [bucketlist]="bucketlist" (remove)="onRemoveBucketList($event)"></app-bucket>
+                  <!-- </div> -->
+                </li>
+              </ul>
+         </div>
+
+      </div>
+
+    </section>
+
+    <div>
+    <footer class="footer" *ngIf="bucketlists.length > 0">
+      <span class="bucketlist-count"><strong>{{bucketlists.length}}</strong> {{bucketlists.length == 1 ? 'bucket list' : 'bucket lists'}}</span>
+    </footer>
+  </div>
+
+</section>
