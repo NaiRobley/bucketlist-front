@@ -1,27 +1,47 @@
-<h2> Welcome to your bucket list </h2>
+<!-- Navbar -->
+<nav class="teal">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Your Bucket Lists</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a href="#">Sign In | Register</a></li>
+    </ul>
+  </div>
+</nav>
+<!-- End of Navbar -->
 
-<a href="#"> Login </a> or <a href="#"> Register </a> to continue
+<!-- Main Container -->
+<div class="container">
 
+    <!-- <a href="#" (click)="bucketlistHome"> Home </a> -->
+    <h1>{{title}}</h1>
 
-<a href="#" (click)="bucketlistHome"> Home </a>
+    <!--The whole content below can be removed with the new code.-->
+    <div style="text-align:center">
 
-<!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
+      <section class="bucketlistapp">
 
-  <section class="bucketlistapp">
+        <!-- Auth -->
+        <!-- <app-auth> </app-auth> -->
+        <!-- End of Auth -->
 
-    <!-- Header section -->
-    <app-bucketlist-list-header (add)="onAddBucketList($event)"></app-bucketlist-list-header>
-    <!-- End of Header section -->
+        <!-- <app-bucketlist [bucketlists]="bucketlists" (add)="onAddBucketList($event)" (remove)="onRemoveBucketList($event)" > </app-bucketlist> -->
+        <app-bucketlist [bucketlists]="bucketlists" (add)="onAddBucketList($event)" (remove)="onRemoveBucketList($event)"> </app-bucketlist>
 
-    <!-- Main Bucket lists section -->
-    <app-bucketlist-home [bucketlists]="bucketlists" (remove)="onRemoveBucketList($event)"> </app-bucketlist-home>
-    <!-- End of Main Bucket Lists section -->
+        <!-- Header section -->
+        <!-- <app-bucketlist-list-header (add)="onAddBucketList($event)"></app-bucketlist-list-header> -->
+        <!-- End of Header section -->
 
-    <!-- Footer section -->
-    <app-bucketlist-footer [bucketlists]="bucketlists"> </app-bucketlist-footer>
-    <!-- End of footer section -->
+        <!-- Main Bucket lists section -->
+        <!-- <app-bucketlist-home [bucketlists]="bucketlists" (remove)="onRemoveBucketList($event)"> </app-bucketlist-home> -->
+        <!-- End of Main Bucket Lists section -->
 
-  </section>
+        <!-- Footer section -->
+        <!-- <app-bucketlist-footer [bucketlists]="bucketlists"> </app-bucketlist-footer> -->
+        <!-- End of footer section -->
+
+      </section>
+
+    </div>
 
 </div>
+<!-- End of Main Container -->
