@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BucketList } from './bucketlist/bucket-list';
 import { BucketListService } from './bucketlist/bucket-list.service';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -19,11 +20,11 @@ export class AppComponent implements OnInit {
 
   bucketlists: BucketList[] = [];
 
-  constructor(private bucketListService: BucketListService) { }
+  constructor(private bucketListService: BucketListService, private apiService: ApiService) { }
 
   public ngOnInit() {
     this.title = 'Your Bucket Lists';
-    this.bucketListService
+    this.apiService
       .getAllBucketLists()
       .subscribe(
         (bucketlists) => {
@@ -34,8 +35,8 @@ export class AppComponent implements OnInit {
 
   // handle event emitted by component
   onAddBucketList(bucketlist: BucketList){
-    this.bucketListService
-    .addBucketList(bucketlist)
+    this.apiService
+    .createBucketList(bucketlist)
     .subscribe(
       (newBucketList) => {
         this.bucketlists = this.bucketlists.concat(newBucketList);
@@ -45,7 +46,7 @@ export class AppComponent implements OnInit {
 
   // Remove a bucket list
   onRemoveBucketList(bucketlist) {
-    this.bucketListService
+    this.apiService
     .deleteBucketListById(bucketlist.id)
     .subscribe(
       (_) => {
@@ -53,17 +54,17 @@ export class AppComponent implements OnInit {
       }
     );
   }
-  //
-  // // Update a bucket list
-  // onUpdateBucketList(bucketlist) {
-  //   this.bucketListService
-  //   .updateBucketList(bucketlist.id)
-  //   .subscribe(
-  //     (bucketlist) => {
-  //       this.bucketlists = this.bucketlists.filter((t) => t.id === bucketlist.id);
-  //     }
-  //   );
-  // }
+
+  // Update a bucket list
+  onUpdateBucketList(bucketlist) {
+    this.apiService
+    .updateBucketList(bucketlist)
+    .subscribe(
+      (_) => {
+        this.bucketlists = this.bucketlists;
+      }
+    );
+  }
 
   // Get all bucket lists
   // get bucketlists(){
