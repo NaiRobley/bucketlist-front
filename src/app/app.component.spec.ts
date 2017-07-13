@@ -4,7 +4,7 @@ import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ApiService } from './api.service';
 import { ApiMockService } from './api-mock.service';
 
-import { BucketListService } from './bucket-list.service';
+import { BucketListService } from './bucketlist/bucket-list.service';
 
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
