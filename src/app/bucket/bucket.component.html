@@ -1,24 +1,29 @@
-<!-- Bucket List View -->
-    <!-- <div class="col s12 m6 l4"> -->
-      <div class="card teal darken-1">
-        <div class="card-content white-text" style="width: 100%;">
-          <span class="card-title">{{bucketlist.name}}</span>
-          <hr>
-            <ul>
-              <li *ngFor="let item of bucketlist.items">
-
-                {{item.name}}
-                {{item.id}}
-                {{item.done}}
-              </li>
-            </ul>
-        </div>
-        <div class="card-action">
-          <a href="#" class=""> <i class="material-icons">add</i> </a>
-          <!-- <input placeholder="What needs to be done?" autofocus="" (keyup.enter)="updateBucketList(bucketlist)"> -->
-          <a href="#" class=""> <i class="material-icons" (click)="updateBucketList(bucketlist)">edit</i> </a>
-          <a href="" class="destroy"> <i class="material-icons" (click)="removeBucketList(bucketlist)">delete</i> </a>
-        </div>
+<div class="card">
+  <div class="card-content" style="width: 100%;">
+    <span class="card-title" (dblclick)="showForm()">
+      {{bucketlist.name}}
+      <i class="material-icons" (click)="showForm()">edit</i>
+      <i class="material-icons" (click)="removeBucketList(bucketlist)">delete</i>
+      <!-- div to update a bucket list name -->
+      <div name="editForm" *ngIf="show==true">
+        <input class="update" placeholder="{{bucketlist.name}}" autofocus [(ngModel)]="bucketlist.name" (keyup.enter)="updateBucketList(bucketlist)">
       </div>
-    <!-- </div> -->
-<!-- End of Bucket List View -->
+      <!-- End of update div -->
+    </span>
+
+    <hr>
+      <ul>
+        <!-- <li *ngFor="let item of bucketlist.items"> -->
+
+          <app-item [item]="item" [bucketlist]="bucketlist"> </app-item>
+
+        <!-- </li> -->
+      </ul>
+  </div>
+
+  <!-- <div class="card-action">
+
+    <i class="material-icons" (click)="removeBucketList(bucketlist)">delete</i>
+  </div> -->
+</div>
+<!-- <app-item [bucketlist]="bucketlist" (remove)="removeBucketList(bucketlist)" (update)="updateBucketList(bucketlist)"></app-item> -->
