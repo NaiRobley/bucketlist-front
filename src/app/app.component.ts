@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from './api.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,14 @@ import { Component, OnInit } from '@angular/core';
 
 export class AppComponent implements OnInit {
 
-  constructor() {}
+  access_token: string = '';
+  constructor(private apiService: ApiService) {}
 
   public ngOnInit() {
-
+    this.access_token = localStorage.getItem('access_token');
   }
 
+  public signOut() {
+    localStorage.setItem('access_token', null);
+  }
 }
