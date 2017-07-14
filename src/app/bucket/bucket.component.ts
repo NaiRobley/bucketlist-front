@@ -25,7 +25,6 @@ export class BucketComponent implements OnInit {
         }
 
         removeBucketList(bucketlist: BucketList) {
-          //this.bucketListService.deleteBucketListById(bucketlist.id);
           this.remove.emit(bucketlist);
         }
 
