@@ -21,7 +21,9 @@ export class ItemComponent implements OnInit {
 
         items: Item[] = [];
 
-        show: boolean = false;
+        showEdit : boolean = false;
+
+        selectedId : number;
 
         @Input()
         item: Item;
@@ -45,12 +47,8 @@ export class ItemComponent implements OnInit {
 
         ngOnInit() {
           // this.item = this.item;
-          // this.apiService.getToken();
+          this.apiService.getToken();
           this.router.navigate(['/bucketlists']);
-        }
-
-        showForm(){
-          this.show = !this.show;
         }
 
         addItem(name, bucketlist_id) {
