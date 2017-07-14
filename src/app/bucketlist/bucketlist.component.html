@@ -1,20 +1,48 @@
 <section class="bucketlistapp">
 
+  <h3> {{title}} </h3>
+
+  {{message}}
+
     <header class="header">
       <input class="new-bucketlist" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newBucketList.name" (keyup.enter)="addBucketList()">
     </header>
 
     <section class="main" *ngIf="bucketlists.length > 0">
 
+
       <div class="row">
 
           <div class="col s12 cards-container">
-              <ul class="bucketlists-list">
-                <li *ngFor="let bucketlist of bucketlists" style="padding: 0; margin: 0;">
-                  <!-- <div class="view"> -->
-                    <app-bucket [bucketlist]="bucketlist" (remove)="onRemoveBucketList($event)"></app-bucket>
-                  <!-- </div> -->
+              <ul class="bucketlist" style="-webkit-padding-start: 0px; -webkit-margin-before: 0em; -webkit-margin-after: 0em;">
+                <li *ngFor="let bucketlist of bucketlists">
+
+                  <div class="card">
+                    <div class="card-content" style="width: 100%;">
+                      <span class="card-title">
+                        {{bucketlist.name}}
+                      </span>
+
+                      <hr>
+                        <ul>
+
+                            <app-item [item]="item" [bucketlist]="bucketlist"> </app-item>
+
+                        </ul>
+                    </div>
+
+                    <div class="card-action">
+                      <div name="editForm" *ngIf="showEditName==true&&selectedId==bucketlist.id">
+                        <input class="update" placeholder="Enter the new name for {{bucketlist.name}}" autofocus [(ngModel)]="bucketlist.name" (keyup.enter)="updateBucketList(bucketlist)">
+                      </div>
+                      <i class="material-icons" (click)="showEditName=!showEditName;selectedId=bucketlist.id;">edit</i>
+                      <i class="material-icons" (click)="removeBucketList(bucketlist)">delete</i>
+                    </div>
+                  </div>
+                  <!-- <app-item [bucketlist]="bucketlist" (remove)="removeBucketList(bucketlist)" (update)="updateBucketList(bucketlist)"></app-item> -->
+
                 </li>
+
               </ul>
          </div>
 
@@ -25,6 +53,8 @@
     <div>
     <footer class="footer" *ngIf="bucketlists.length > 0">
       <span class="bucketlist-count"><strong>{{bucketlists.length}}</strong> {{bucketlists.length == 1 ? 'bucket list' : 'bucket lists'}}</span>
+      <span class="" *ngIf="previous_page"> <i class="material-icons" (click)="previousPage(previous_page)">skip_previous</i>  </span>
+      <span class="" *ngIf="next_page"> <i class="material-icons" (click)="nextPage(next_page)">skip_next</i>  </span>
     </footer>
   </div>
 
