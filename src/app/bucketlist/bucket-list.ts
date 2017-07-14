@@ -1,14 +1,10 @@
 export class BucketList {
   id: number;
-  name: string = "";
+  name: string = '';
   items: object[] = [];
+  created_by: number;
 
-  constructor(values: Object = {}){
+  constructor(values: Object = {}) {
     Object.assign(this, values);
   }
 }
-
-
-// let bucketlist = new BucketList({
-//   name: "Go To Arusha"
-// });
