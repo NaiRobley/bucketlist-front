@@ -1,39 +1,106 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { BucketList } from './bucket-list';
+import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-bucketlist',
   templateUrl: './bucketlist.component.html',
-  styleUrls: ['./bucketlist.component.css']
+  styleUrls: ['./bucketlist.component.css'],
+  providers: [ApiService]
 })
+
 export class BucketlistComponent implements OnInit {
 
+      title = 'Your Bucket Lists';
 
-  title = 'Your Bucket Lists';
+      newBucketList: BucketList = new BucketList();
 
-    newBucketList: BucketList = new BucketList();
+      bucketlists: BucketList[] = [];
 
-      @Input()
-      bucketlists: BucketList[];
+      message: string = '';
 
-      @Output()
-      remove: EventEmitter<BucketList> = new EventEmitter();
+      next_page: string = '';
 
-      @Output()
-      add: EventEmitter<BucketList> = new EventEmitter();
+      previous_page: string = '';
 
-      constructor() { }
+      // showEdit : boolean = false;
+
+      selectedId : number;
+
+      constructor(
+        private apiService: ApiService,
+        private router: Router
+      ) { }
 
       ngOnInit() {
+        this.title = 'Your Bucket Lists';
+        this.apiService
+          .getAllBucketLists()
+          .subscribe(
+            (response) => {
+              this.bucketlists = response['bucketlists'].map((bucketlist) => new BucketList(bucketlist));
+              this.message = response['message'];
+              this.previous_page = response['previous_page'];
+              this.next_page = response['next_page'];
+          });
+      }
+
+
+      nextPage(next_page) {
+        this.apiService
+          .getNextPage(next_page)
+          .subscribe(
+            (response) => {
+              this.bucketlists = response['bucketlists'].map((bucketlist) => new BucketList(bucketlist));
+              this.message = response['message'];
+              this.previous_page = response['previous_page'];
+              this.next_page = response['next_page'];
+          });
+      }
+
+      previousPage(next_page) {
+        this.apiService
+          .getPreviousPage(next_page)
+          .subscribe(
+            (response) => {
+              this.bucketlists = response['bucketlists'].map((bucketlist) => new BucketList(bucketlist));
+              this.message = response['message'];
+              this.previous_page = response['previous_page'];
+              this.next_page = response['next_page'];
+          });
       }
 
       // Add a Bucket list
-      addBucketList(){
-        this.add.emit(this.newBucketList);
-        this.newBucketList = new BucketList();
+      addBucketList(bucketlist: BucketList){
+        this.apiService
+          .createBucketList(this.newBucketList)
+          .subscribe(
+            (newBucketList) => {
+              this.bucketlists = this.bucketlists.concat(newBucketList);
+            }
+          );
+        // this.router.navigate(['/bucketlists']);
       }
 
-      onRemoveBucketList(bucketlist: BucketList){
-        this.remove.emit(bucketlist);
+      updateBucketList(bucketlist) {
+        this.apiService
+          .updateBucketList(bucketlist)
+          .subscribe(
+            (_) => {
+              this.bucketlists = this.bucketlists;
+            }
+          );
+        this.router.navigate(['/bucketlists']);
       }
 
+      removeBucketList(bucketlist) {
+        this.apiService
+          .deleteBucketListById(bucketlist.id)
+          .subscribe(
+            (_) => {
+              this.bucketlists = this.bucketlists.filter((t) => t.id !== bucketlist.id);
+            }
+          );
+      }
 }
