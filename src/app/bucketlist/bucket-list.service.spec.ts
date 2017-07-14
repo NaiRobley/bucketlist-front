@@ -1,8 +1,8 @@
 import { TestBed, async, inject } from '@angular/core/testing';
-import { BucketList } from "./bucket-list";
+import { BucketList } from './bucket-list';
 import { BucketListService } from './bucket-list.service';
-import { ApiService } from './api.service';
-import { ApiMockService } from './api-mock.service';
+import { ApiService } from '../api.service';
+import { ApiMockService } from '../api-mock.service';
 
 describe('BucketListService', () => {
   beforeEach(() => {
@@ -88,7 +88,9 @@ describe('BucketListService', () => {
       service.addBucketList(bucketlist);
       let updatedBucketList = service.updateBucketList({
         id: 2,
-        name: 'new name'
+        name: 'new name',
+        items: [],
+        created_by: 1
       });
       expect(updatedBucketList).toEqual(null);
     }));
