@@ -1,9 +1,15 @@
+
 <!-- Navbar -->
 <nav class="teal">
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Your Bucket Lists</a>
+    <a routerLink="" class="brand-logo">Your Bucket Lists</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
-      <li><a href="#">Sign In | Register</a></li>
+      <!-- Routerlink does not reload page -->
+      <!--<li> <a routerLink="/auth">Sign In | Register</a> </li>-->
+      <li> <a href="/auth" *ngIf="!access_token">Sign In | Register</a> </li>
+      <li> <a href="/auth" *ngIf="access_token">Sign out</a> </li>
+      <li> <a href="/bucketlists">Bucketlists</a> </li>
+      <li> <a routerLink="">Home</a> </li>
     </ul>
   </div>
 </nav>
@@ -13,31 +19,21 @@
 <div class="container">
 
     <!-- <a href="#" (click)="bucketlistHome"> Home </a> -->
-    <h1>{{title}}</h1>
+    <!--<h1>{{title}}</h1>-->
 
     <!--The whole content below can be removed with the new code.-->
-    <div style="text-align:center">
+    <div>
 
       <section class="bucketlistapp">
 
         <!-- Auth -->
         <!-- <app-auth> </app-auth> -->
         <!-- End of Auth -->
+        <!-- Home Page -->
+        <router-outlet> </router-outlet>
 
         <!-- <app-bucketlist [bucketlists]="bucketlists" (add)="onAddBucketList($event)" (remove)="onRemoveBucketList($event)" > </app-bucketlist> -->
-        <app-bucketlist [bucketlists]="bucketlists" (add)="onAddBucketList($event)" (remove)="onRemoveBucketList($event)" (update)="onUpdateBucketList($event)"> </app-bucketlist>
-
-        <!-- Header section -->
-        <!-- <app-bucketlist-list-header (add)="onAddBucketList($event)"></app-bucketlist-list-header> -->
-        <!-- End of Header section -->
-
-        <!-- Main Bucket lists section -->
-        <!-- <app-bucketlist-home [bucketlists]="bucketlists" (remove)="onRemoveBucketList($event)"> </app-bucketlist-home> -->
-        <!-- End of Main Bucket Lists section -->
-
-        <!-- Footer section -->
-        <!-- <app-bucketlist-footer [bucketlists]="bucketlists"> </app-bucketlist-footer> -->
-        <!-- End of footer section -->
+        <!--<app-bucketlist [bucketlists]="bucketlists" (add)="onAddBucketList($event)" (remove)="onRemoveBucketList($event)" (update)="onUpdateBucketList($event)"> </app-bucketlist>-->
 
       </section>
 
