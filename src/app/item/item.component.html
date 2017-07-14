@@ -1,30 +1,23 @@
 
 <li *ngFor="let item of bucketlist.items">
     <form action="#">
-      <p>
+
         <input type="checkbox" id="{{item.id}}" [checked]="item.done" (change)="item.done=!item.done" (click)="markItemDone(item.id, bucketlist.id, !item.done)"/>
         <label for="{{item.id}}" class="black-text">
           {{item.name}}
-          <i class="material-icons" (click)="showForm()">edit</i>
-          <i class="material-icons" (click)="removeItem(item.id, bucketlist.id)">delete</i>
         </label>
-      </p>
+        <i class="material-icons" (click)="show=!show;selectedId=item.id">edit</i>
+        <i class="material-icons" (click)="removeItem(item.id, bucketlist.id)">delete</i>
+
     </form>
 
-<div id="editForm" *ngIf="show==true">
-  <input class="update" placeholder="{{item.name}}" autofocus="" [(ngModel)]="name" (keyup.enter)="editItemName(name, item.id, bucketlist.id)">
+<div id="editForm" *ngIf="show==true&&selectedId==item.id">
+  <input class="update" placeholder="Enter the new name for {{item.name}}" autofocus="" [(ngModel)]="name" (keyup.enter)="editItemName(name, item.id, bucketlist.id)">
 </div>
 
 </li>
-<div name="newItemForm" *ngIf="show==true">
+
+<div name="newItemForm" *ngIf="showNew==true">
   <input class="new-bucketlist" placeholder="Add an item" autofocus="" [(ngModel)]="name" (keyup.enter)="addItem(name, bucketlist.id)">
 </div>
-<i class="material-icons" (click)="showForm()">add</i>
-
-<!-- <div name="editForm" *ngIf="show==true">
-  <input class="update" placeholder="{{bucketlist.name}}" autofocus [(ngModel)]="bucketlist.name" (keyup.enter)="updateBucketList(bucketlist)">
-</div>
-
-<i class="material-icons" (click)="showRenameForm()">edit</i>
-
-<i class="material-icons" (click)="removeBucketList(bucketlist)">delete</i> -->
+<i class="material-icons" (click)="showNew=!showNew">add</i>
