@@ -34,7 +34,7 @@ export class BucketlistComponent implements OnInit {
       ) { }
 
       ngOnInit() {
-        this.title = 'Your Bucket Lists';
+        this.title = 'Your Bucket Lists ¯¯\\_(ツ)_/¯¯';
         this.apiService
           .getAllBucketLists()
           .subscribe(
@@ -46,7 +46,7 @@ export class BucketlistComponent implements OnInit {
           });
       }
 
-
+      // Get the next page
       nextPage(next_page) {
         this.apiService
           .getNextPage(next_page)
@@ -59,6 +59,7 @@ export class BucketlistComponent implements OnInit {
           });
       }
 
+      // Get the previous page
       previousPage(next_page) {
         this.apiService
           .getPreviousPage(next_page)
@@ -83,6 +84,21 @@ export class BucketlistComponent implements OnInit {
         // this.router.navigate(['/bucketlists']);
       }
 
+      // Search for a bucket list
+      searchBucketList(query, limit) {
+        this.apiService
+          .searchBucketList(query, limit)
+          .subscribe(
+            (response) => {
+              this.bucketlists = response['bucketlists'].map((bucketlist) => new BucketList(bucketlist));
+              this.message = response['message'];
+              this.previous_page = response['previous_page'];
+              this.next_page = response['next_page'];
+            }
+          )
+      }
+
+      // Rename a bucket list
       updateBucketList(bucketlist) {
         this.apiService
           .updateBucketList(bucketlist)
@@ -94,6 +110,7 @@ export class BucketlistComponent implements OnInit {
         this.router.navigate(['/bucketlists']);
       }
 
+      // Delete a bucket list
       removeBucketList(bucketlist) {
         this.apiService
           .deleteBucketListById(bucketlist.id)
