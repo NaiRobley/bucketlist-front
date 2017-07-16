@@ -8,8 +8,6 @@ import { ApiService } from './api.service';
 })
 
 
-
-
 export class AppComponent implements OnInit {
 
   access_token: string = '';
