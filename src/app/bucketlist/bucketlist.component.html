@@ -5,7 +5,45 @@
   {{message}}
 
     <header class="header">
-      <input class="new-bucketlist" placeholder="What needs to be done?" autofocus="" [(ngModel)]="newBucketList.name" (keyup.enter)="addBucketList()">
+      <div class="row">
+        <form (ngSubmit)="addBucketList()">
+        <div class="input-field col s6">
+          <i class="material-icons prefix">add_circle</i>
+          <input type="text" id="new-bucketlist" class="new-bucketlist" name="name" [(ngModel)]="newBucketList.name" (keyup.enter)="addBucketList()">
+          <label for="new-bucketlist"> Create a new bucket list </label>
+        </div>
+
+        <div class="input-field col l2">
+          <button class="btn waves-effect waves-light" type="submit" value="submit"> Submit </button>
+        </div>
+
+      </form>
+
+      </div>
+
+      <div class="row">
+          <form (ngSubmit)="searchBucketList(query, 10)">
+
+            <div class="input-field col s6">
+              <i class="material-icons prefix">search</i>
+              <input type="text" id="icon-prefix" name="query" [(ngModel)]="query" (keyup.enter)="searchBucketList(query, 10)">
+              <label for="icon-prefix">Find a bucket list</label>
+            </div>
+
+            <div class="input-field col l4" hidden>
+              <select name="limit" [(ngModel)]="limit">
+                <option value="5" selected> 5 </option>
+                <option value="10"> 10 </option>
+                <option value="20"> 20 </option>
+              </select>
+            </div>
+
+            <div class="input-field col l2">
+              <button class="btn waves-effect waves-light" type="submit" value="submit"> Search </button>
+            </div>
+
+          </form>
+      </div>
     </header>
 
     <section class="main" *ngIf="bucketlists.length > 0">
@@ -32,14 +70,15 @@
                     </div>
 
                     <div class="card-action">
+
                       <div name="editForm" *ngIf="showEditName==true&&selectedId==bucketlist.id">
-                        <input class="update" placeholder="Enter the new name for {{bucketlist.name}}" autofocus [(ngModel)]="bucketlist.name" (keyup.enter)="updateBucketList(bucketlist)">
+                        <input class="update" placeholder="Enter the new name for {{bucketlist.name}}" [(ngModel)]="bucketlist.name" (keyup.enter)="updateBucketList(bucketlist)">
                       </div>
+
                       <i class="material-icons" (click)="showEditName=!showEditName;selectedId=bucketlist.id;">edit</i>
                       <i class="material-icons" (click)="removeBucketList(bucketlist)">delete</i>
                     </div>
                   </div>
-                  <!-- <app-item [bucketlist]="bucketlist" (remove)="removeBucketList(bucketlist)" (update)="updateBucketList(bucketlist)"></app-item> -->
 
                 </li>
 
@@ -50,12 +89,16 @@
 
     </section>
 
+    <section *ngIf="bucketlists.length < 1"> No Bucket Lists found </section>
+
     <div>
     <footer class="footer" *ngIf="bucketlists.length > 0">
       <span class="bucketlist-count"><strong>{{bucketlists.length}}</strong> {{bucketlists.length == 1 ? 'bucket list' : 'bucket lists'}}</span>
       <span class="" *ngIf="previous_page"> <i class="material-icons" (click)="previousPage(previous_page)">skip_previous</i>  </span>
-      <span class="" *ngIf="next_page"> <i class="material-icons" (click)="nextPage(next_page)">skip_next</i>  </span>
+      <span class="" *ngIf="next_page"> <i class="material-icons" (click)="nextPage(next_page)">last_page</i>  </span>
     </footer>
   </div>
 
 </section>
+
+<a alt="Toast" class="waves-effect waves-light btn" message="Toast" duration="4000" toast='click'>Toast!</a>
