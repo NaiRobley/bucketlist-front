@@ -6,8 +6,8 @@
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <!-- Routerlink does not reload page -->
       <!--<li> <a routerLink="/auth">Sign In | Register</a> </li>-->
-      <li> <a href="/auth" *ngIf="!access_token">Sign In | Register</a> </li>
-      <li> <a href="/auth" *ngIf="access_token">Sign out</a> </li>
+      <li> <a href="/auth" *ngIf="access_token===null">Sign In | Register</a> </li>
+      <li> <a href="/auth" *ngIf="access_token" (click)="signOut();access_token=null">Sign out</a> </li>
       <li> <a href="/bucketlists">Bucketlists</a> </li>
       <li> <a routerLink="">Home</a> </li>
     </ul>
@@ -21,7 +21,6 @@
     <!-- <a href="#" (click)="bucketlistHome"> Home </a> -->
     <!--<h1>{{title}}</h1>-->
 
-    <!--The whole content below can be removed with the new code.-->
     <div>
 
       <section class="bucketlistapp">
