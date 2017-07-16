@@ -6,7 +6,7 @@
         <label for="{{item.id}}" class="black-text">
           {{item.name}}
         </label>
-        <i class="material-icons" (click)="removeItem(item.id, bucketlist.id)" style="float: right">delete</i>
+        <i class="material-icons" (click)="removeItem(item, bucketlist.id)" style="float: right">delete</i>
         <i class="material-icons" (click)="show=!show;selectedId=item.id" style="float: right">edit</i>
 
     </form>
