@@ -82,12 +82,13 @@ export class ItemComponent implements OnInit {
             )
         }
 
-        removeItem(item_id, bucketlist_id) {
+        removeItem(item, bucketlist_id) {
           this.apiService
-            .removeItem(item_id, bucketlist_id)
+            .removeItem(item.id, bucketlist_id)
             .subscribe(
               (_) => {
-                this.bucketlist.items = this.bucketlist.items;
+                this.items = this.items.filter((t) => t.id !== item.id);
+                window.location.reload();
               }
             )
         }
