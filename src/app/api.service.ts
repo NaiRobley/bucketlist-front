@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { environment } from 'environments/environment';
-
 import { Http, Response, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+import { environment } from 'environments/environment';
 import { BucketList } from './bucketlist/bucket-list';
 import { Item } from './item/item';
 import { User } from './auth/user';
@@ -73,14 +72,11 @@ export class ApiService {
   }
 
   // API: POST /bucketlists/
-  public searchBucketList(query): Observable<BucketList> {
+  public searchBucketList(query, limit): Observable<BucketList> {
     return this.http
-      .post(API_URL + '/api/v1/bucketlists/?q=' + query, {'headers': this.headers})
+      .get(API_URL + '/api/v1/bucketlists/?q=' + query + '&limit=' + limit, {'headers': this.headers})
       .map(response => {
-        this.message =  response.json()['message'];
-        console.log(response.json());
-        const bucketlists = response.json()['bucketlists'];
-        return bucketlists.map((bucketlist) => new BucketList(bucketlist));
+        return response.json();
       })
       .catch(this.handleError);
   }
