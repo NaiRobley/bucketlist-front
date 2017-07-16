@@ -12,6 +12,8 @@ import { User } from './auth/user';
 
 const API_URL = environment.apiUrl;
 
+declare var Materialize: any;
+
 @Injectable()
 export class ApiService {
 
@@ -56,7 +58,6 @@ export class ApiService {
   public getToken() {
     let token = localStorage.getItem('access_token');
     this.headers.append('Authorization', 'Bearer ' + token);
-    console.log(token);
   }
 
   // API: GET /bucketlists
@@ -76,6 +77,7 @@ export class ApiService {
     return this.http
       .get(API_URL + '/api/v1/bucketlists/?q=' + query + '&limit=' + limit, {'headers': this.headers})
       .map(response => {
+        Materialize.toast(response.json()['bucketlists'].length + ' bucketlists found.', 4000);
         return response.json();
       })
       .catch(this.handleError);
@@ -86,7 +88,6 @@ export class ApiService {
     return this.http
       .get(API_URL + '/api/v1/' + next_page, {'headers': this.headers})
       .map(response => {
-        console.log(response.json());
         return response.json();
       })
       .catch(this.handleError);
@@ -97,7 +98,6 @@ export class ApiService {
     return this.http
       .get(API_URL + '/api/v1/' + next_page, {'headers': this.headers})
       .map(response => {
-        console.log(response.json());
         return response.json();
       })
       .catch(this.handleError);
@@ -108,7 +108,7 @@ export class ApiService {
     return this.http
       .post(API_URL + '/api/v1/bucketlists', JSON.stringify({'name': bucketlist.name}), {'headers': this.headers})
       .map(response => {
-        // console.log(response.json()['name']);
+        Materialize.toast('Bucketlist \'' + response.json()['name'] + '\' has been created successfully!', 4000);
         return new BucketList(response.json());
       })
       .catch(this.handleError);
@@ -131,7 +131,7 @@ export class ApiService {
       .put(API_URL + '/api/v1/bucketlists/' + bucketlist.id, bucketlist, {'headers': this.headers})
       .map(response => {
         if (response.json()['name']) {
-          alert("The new name is " + response.json()['name']);
+          Materialize.toast('Bucketlist renamed to \'' + response.json()['name'] + '\'', 4000);
         }
         return new BucketList(response.json());
       })
@@ -143,7 +143,7 @@ export class ApiService {
     return this.http
       .delete(API_URL + '/api/v1/bucketlists/' + bId, {'headers': this.headers})
       .map(response => {
-        alert("deleted");
+        Materialize.toast("Bucketlist Successfully Deleted!", 4000);
       })
       .catch(this.handleError);
   }
@@ -155,9 +155,9 @@ export class ApiService {
     return this.http
       .post(API_URL + '/api/v1/bucketlists/' + bucketlist_id + '/items', JSON.stringify({'name': name}), {'headers': this.headers})
       .map(response => {
-        // if (response.json()['name']) {
-        //   alert('Item ' + response.json()['name'] + ' has been created');
-        // }
+        if (response.json()['name']) {
+          Materialize.toast(('Item \'' + response.json()['name'] + '\' has been added'), 4000);
+        }
         return new Item(response.json());
       })
       .catch(this.handleError);
@@ -170,7 +170,7 @@ export class ApiService {
       .put(API_URL + '/api/v1/bucketlists/' + bucketlist_id + '/items/' + item_id, JSON.stringify({'name': name}), {'headers': this.headers})
       .map(response => {
         if (response.json()['name']) {
-          alert('Item ' + response.json()['name'] + ' has been renamed');
+          Materialize.toast(('Item \'' + name + '\' has been renamed'), 4000);
         }
         return new Item(response.json());
       })
@@ -184,9 +184,9 @@ export class ApiService {
       .put(API_URL + '/api/v1/bucketlists/' + bucketlist_id + '/items/' + item_id, JSON.stringify({'done': done}), {'headers': this.headers})
       .map(response => {
         if (response.json()['done'] == true ) {
-          alert('Item ' + response.json()['name'] + ' has been marked as done');
+          Materialize.toast(('Item \'' + response.json()['name'] + '\' has been marked as done'), 4000);
         } else {
-          alert('Item ' + response.json()['name'] + ' has been marked as undone');
+          Materialize.toast(('Item \'' + response.json()['name'] + '\' has been marked as undone'), 4000);
         }
         return new Item(response.json());
       })
@@ -199,15 +199,14 @@ export class ApiService {
     return this.http
       .delete(API_URL + '/api/v1/bucketlists/' + bucketlist_id + '/items/' + item_id, {'headers': this.headers})
       .map(response => {
-          alert("deleted");
+          Materialize.toast("Item Successfully Deleted!", 4000);
       })
       .catch(this.handleError);
   }
 
   private handleError (error: Response | any) {
     console.error('ApiService::handleError', error);
-    // console.log(error.json()['message']);
-    alert(error.json()["message"]);
+    Materialize.toast(error.json()["message"], 4000);
     return Observable.throw(error);
   }
 
