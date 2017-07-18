@@ -22,6 +22,10 @@ export class AuthComponent implements OnInit {
 
   message: string = '';
 
+  access_token: string = '';
+
+  login_status: number;
+
   constructor(
     private apiService: ApiService,
     private router: Router
@@ -36,9 +40,9 @@ export class AuthComponent implements OnInit {
       .login(username, password)
       .subscribe(response => {
         this.message = response.json()['message'];
-        console.log(this.message);
-        if (response.json()['access_token']) {
+        if (response.json()['access_token'] != '') {
           localStorage.setItem('access_token', response.json()['access_token']);
+          localStorage.setItem('login_status', '1');
           Materialize.toast("Successfully logged in!", 5000);
           this.router.navigate(['/bucketlists']);
         }
