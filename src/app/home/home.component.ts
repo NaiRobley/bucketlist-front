@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  login_status: string = '';
+
   constructor() { }
 
   ngOnInit() {
+    this.login_status = localStorage.getItem('login_status');
   }
 
 }
