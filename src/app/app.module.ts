@@ -4,8 +4,6 @@ import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-import { BucketListService } from './bucketlist/bucket-list.service';
-
 import { AppComponent } from './app.component';
 import { ApiService } from './api.service';
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
@@ -33,7 +31,7 @@ import { AppRoutingModule, routingComponents } from './app.routes';
     routingComponents,
     ItemComponent
   ],
-  providers: [BucketListService, ApiService],
+  providers: [ApiService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
