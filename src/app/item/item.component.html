@@ -4,7 +4,7 @@
 
         <input type="checkbox" id="{{item.id}}" [checked]="item.done" (change)="item.done=!item.done" (click)="markItemDone(item.id, bucketlist.id, !item.done)"/>
         <label for="{{item.id}}" class="black-text">
-          <h6> {{item.name}} </h6>
+          {{item.name}}
         </label>
         <i class="material-icons" (click)="removeItem(item, bucketlist.id)" style="float: right; cursor: pointer">delete</i>
         <i class="material-icons" (click)="show=!show;selectedId=item.id" style="float: right; cursor: pointer">edit</i>
