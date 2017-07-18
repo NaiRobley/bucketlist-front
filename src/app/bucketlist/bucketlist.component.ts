@@ -24,9 +24,11 @@ export class BucketlistComponent implements OnInit {
 
       previous_page: string = '';
 
-      // showEdit : boolean = false;
-
       selectedId : number;
+
+      access_token: string = '';
+
+      login_status: string = '';
 
       constructor(
         private apiService: ApiService,
@@ -35,6 +37,11 @@ export class BucketlistComponent implements OnInit {
 
       ngOnInit() {
         this.title = 'Your Bucket Lists ¯¯\\_(ツ)_/¯¯';
+        if (localStorage.getItem('login_status') == '0') {
+          this.router.navigate(['/auth']);
+        } else {
+          this.login_status = '1';
+        }
         this.apiService
           .getAllBucketLists()
           .subscribe(
@@ -112,6 +119,7 @@ export class BucketlistComponent implements OnInit {
 
       // Delete a bucket list
       removeBucketList(bucketlist) {
+        if (confirm('Are you sure you want to delete bucket list \'' + bucketlist.name + '\'?')) {
         this.apiService
           .deleteBucketListById(bucketlist.id)
           .subscribe(
@@ -119,5 +127,6 @@ export class BucketlistComponent implements OnInit {
               this.bucketlists = this.bucketlists.filter((t) => t.id !== bucketlist.id);
             }
           );
+        }
       }
 }
