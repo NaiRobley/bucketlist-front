@@ -11,13 +11,18 @@ import { ApiService } from './api.service';
 export class AppComponent implements OnInit {
 
   access_token: string = '';
-  constructor(private apiService: ApiService) {}
+
+  login_status: string = '';
+
+  constructor( private apiService: ApiService ) {}
 
   public ngOnInit() {
     this.access_token = localStorage.getItem('access_token');
+    this.login_status = localStorage.getItem('login_status');
   }
 
   public signOut() {
     localStorage.setItem('access_token', null);
+    localStorage.setItem('login_status', '0');
   }
 }
