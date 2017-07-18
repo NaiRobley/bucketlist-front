@@ -37,8 +37,6 @@ export class ItemComponent implements OnInit {
         @Output()
         remove: EventEmitter<Item> = new EventEmitter();
 
-        // item: Item[] = [];
-
         constructor(
           private apiService: ApiService,
           private router: Router
@@ -46,7 +44,6 @@ export class ItemComponent implements OnInit {
 
 
         ngOnInit() {
-          // this.item = this.item;
           this.apiService.getToken();
           this.router.navigate(['/bucketlists']);
         }
@@ -59,7 +56,6 @@ export class ItemComponent implements OnInit {
                 this.bucketlist.items = this.bucketlist.items.concat(newItem);
               }
             )
-            // window.location.reload();
         }
 
         editItemName(name, item_id, bucketlist_id) {
@@ -83,6 +79,7 @@ export class ItemComponent implements OnInit {
         }
 
         removeItem(item, bucketlist_id) {
+          if (confirm('Are you sure you want to delete item \'' + item.name + '\'?')) {
           this.apiService
             .removeItem(item.id, bucketlist_id)
             .subscribe(
@@ -91,6 +88,7 @@ export class ItemComponent implements OnInit {
                 window.location.reload();
               }
             )
+          }
         }
 
 }
