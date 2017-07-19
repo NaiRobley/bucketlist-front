@@ -132,8 +132,12 @@ export class ApiService {
       .map(response => {
         if (response.json()['name']) {
           Materialize.toast('Bucketlist renamed to \'' + response.json()['name'] + '\'', 4000);
+          return new BucketList(response.json());
+        } else {
+          Materialize.toast(response.json()['message']);
+          window.location.reload();
+          return response.json();
         }
-        return new BucketList(response.json());
       })
       .catch(this.handleError);
   }
