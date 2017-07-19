@@ -40,11 +40,16 @@ export class AuthComponent implements OnInit {
       .login(username, password)
       .subscribe(response => {
         this.message = response.json()['message'];
+        localStorage.setItem('message', this.message);
         if (response.json()['access_token'] != '') {
           localStorage.setItem('access_token', response.json()['access_token']);
           localStorage.setItem('login_status', '1');
+          localStorage.setItem('current_user', username);
           Materialize.toast("Successfully logged in!", 5000);
           this.router.navigate(['/bucketlists']);
+        } else {
+          localStorage.setItem('login_status', '0');
+          this.router.navigate(['/auth']);
         }
       });
   }
