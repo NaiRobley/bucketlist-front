@@ -2,7 +2,7 @@
 
 <section class="bucketlistapp">
 
-  <h3> {{title}} </h3>
+  <h3 class="center"> {{title}} </h3>
 
     <header class="header">
       <div class="row">
@@ -36,13 +36,8 @@
               </div>
 
               <div class="input-field col s2 l2">
-                <input type="text" [value]=5 id="limit" name="limit" [(ngModel)]="limit">
+                <input type="text" id="limit" value={{limit}} name="limit" [(ngModel)]="limit">
                 <label for="limit">Limit</label>
-                <!-- <select name="limit" [(ngModel)]="limit">
-                  <option [ngValue]="5" selected> 5 </option>
-                  <option [ngValue]="10"> 10 </option>
-                  <option [ngValue]="20"> 20 </option>
-                </select> -->
               </div>
 
               <div class="input-field col s2 l2">
