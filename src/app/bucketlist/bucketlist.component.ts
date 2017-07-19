@@ -3,6 +3,8 @@ import { BucketList } from './bucket-list';
 import { ApiService } from '../api.service';
 import { Router } from '@angular/router';
 
+declare var Materialize: any;
+
 @Component({
   selector: 'app-bucketlist',
   templateUrl: './bucketlist.component.html',
@@ -30,17 +32,23 @@ export class BucketlistComponent implements OnInit {
 
       login_status: string = '';
 
+      current_user: string = '';
+
+      limit: number;
+
       constructor(
         private apiService: ApiService,
         private router: Router
       ) { }
 
       ngOnInit() {
-        this.title = 'Your Bucket Lists ¯¯\\_(ツ)_/¯¯';
         if (localStorage.getItem('login_status') == '0') {
           this.router.navigate(['/auth']);
         } else {
           this.login_status = '1';
+          this.current_user = localStorage.getItem('current_user');
+          this.title = 'Your Bucket Lists, ' + this.current_user + '.';
+          this.limit = 5;
         }
         this.apiService
           .getAllBucketLists()
@@ -114,7 +122,6 @@ export class BucketlistComponent implements OnInit {
               this.bucketlists = this.bucketlists;
             }
           );
-        this.router.navigate(['/bucketlists']);
       }
 
       // Delete a bucket list
