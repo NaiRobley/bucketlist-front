@@ -246,6 +246,7 @@ export class ApiService {
 
   private handleError (error: Response | any) {
     // console.error('ApiService::handleError', error);
+    window.location.reload();
     Materialize.toast(error.json()["message"], 4000);
     return Observable.throw(error);
   }
