@@ -30,7 +30,7 @@ export class BucketlistComponent implements OnInit {
 
       access_token: string = '';
 
-      login_status: string = '';
+      login_status: boolean;
 
       current_user: string = '';
 
@@ -42,10 +42,10 @@ export class BucketlistComponent implements OnInit {
       ) { }
 
       ngOnInit() {
-        if (localStorage.getItem('login_status') == '0') {
+        if (JSON.parse(localStorage.getItem('login_status')) == false) {
           this.router.navigate(['/auth']);
         } else {
-          this.login_status = '1';
+          this.login_status = true;
           this.current_user = localStorage.getItem('current_user');
           this.title = 'Your Bucket Lists, ' + this.current_user + '.';
           this.limit = 5;

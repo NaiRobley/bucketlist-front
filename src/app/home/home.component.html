@@ -8,8 +8,8 @@
         <h5 class="header col s12 white-text">Have anything you have not done and want to do? Have a goal you want to achieve before time runs out?</h5>
       </div>
       <div class="row center">
-        <a href="/auth" class="waves-effect waves-light teal btn" *ngIf="login_status==0">Login | Register</a>
-        <a href="/bucketlists" class="waves-effect waves-light teal btn" *ngIf="login_status==1">My Bucket Lists</a>
+        <a href="/auth" class="waves-effect waves-light teal btn" *ngIf="login_status==false">Login | Register</a>
+        <a href="/bucketlists" class="waves-effect waves-light teal btn" *ngIf="login_status==true">My Bucket Lists</a>
       </div>
       <br><br>
 

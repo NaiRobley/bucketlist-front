@@ -24,7 +24,7 @@ export class AuthComponent implements OnInit {
 
   access_token: string = '';
 
-  login_status: number;
+  login_status: boolean;
 
   constructor(
     private apiService: ApiService,
@@ -45,11 +45,11 @@ export class AuthComponent implements OnInit {
           localStorage.setItem('access_token', response.json()['access_token']);
           Materialize.toast("Successfully logged in!", 5000);
           this.router.navigate(['/bucketlists']);
-          localStorage.setItem('login_status', '1');
+          localStorage.setItem('login_status', JSON.stringify(this.login_status = true));
           localStorage.setItem('current_user', response.json()['username']);
           localStorage.setItem('email', response.json()['email'])
         } else {
-          localStorage.setItem('login_status', '0');
+          localStorage.setItem('login_status', JSON.stringify(this.login_status = false));
           localStorage.setItem('current_user', null);
           localStorage.setItem('email', null);
           this.router.navigate(['/auth']);
