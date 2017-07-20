@@ -31,9 +31,6 @@ export class AuthComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
-  }
-
   // Log in a user
   login(username, password) {
     this.apiService
