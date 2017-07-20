@@ -208,8 +208,44 @@ export class ApiService {
       .catch(this.handleError);
   }
 
+  // API: PUT /auth/user/
+  public updateUsername(username, password, newUserName) {
+    return this.http
+      .put(API_URL + '/auth/user/',
+          JSON.stringify({'username': username, 'password': password, 'new_username': newUserName}),
+          {'headers': this.headers})
+      .map(response => {
+        return response;
+      })
+      .catch(this.handleError);
+  }
+
+  // API: PUT /auth/user/
+  public updateEmail(username, password, newEmail) {
+    return this.http
+      .put(API_URL + '/auth/user/',
+          JSON.stringify({'username': username, 'password': password, 'new_email': newEmail}),
+          {'headers': this.headers})
+      .map(response => {
+            return response;
+      })
+      .catch(this.handleError);
+  }
+
+  // API: PUT /auth/user
+  public updatePassword(username, password, newPassword) {
+    return this.http
+      .put(API_URL + '/auth/user/',
+          JSON.stringify({'username': username, 'password': password, 'new_password': newPassword}),
+          {'headers': this.headers})
+      .map(response => {
+            return response;
+      })
+      .catch(this.handleError);
+  }
+
   private handleError (error: Response | any) {
-    console.error('ApiService::handleError', error);
+    // console.error('ApiService::handleError', error);
     Materialize.toast(error.json()["message"], 4000);
     return Observable.throw(error);
   }
