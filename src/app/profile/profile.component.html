@@ -1,0 +1,102 @@
+<div class="container">
+  <br>
+  <!-- Profile Card -->
+    <div class="row">
+      <div class="col s12 m6">
+        <div class="card dz-depth-4">
+          <div class="card-content">
+            <span class="card-title">Your details</span>
+            <hr> <br>
+            <h5> Username: {{username}} </h5>
+            <h5> Email: {{email}} </h5>
+          </div>
+          <div class="card-action">
+            <div class="row">
+              <span class="waves-effect waves-light col l4 teal-text" (click)="showUsernameForm=!showUsernameForm"> Change Username </span>
+              <span class="waves-effect waves-light col l4 teal-text" (click)="showEmailForm=!showEmailForm"> Update Email </span>
+              <span class="waves-effect waves-light col l4 teal-text" (click)="showPasswordForm=!showPasswordForm"> Update Password </span>
+            </div>
+            <div class="row">
+
+              <div *ngIf="showUsernameForm">
+                <br>
+                <form class="col s12" (ngSubmit)="updateUsername(username, password, newUsername);showUsernameForm=false">
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">perm_identity</i>
+                      <input id="login-username" name="newUsername" [(ngModel)]="newUsername" type="text" class="validate">
+                      <label for="login-username">New Username</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">vpn_key</i>
+                      <input id="login-password" name="password" [(ngModel)]="password" type="password" class="validate">
+                      <label for="login-password">Pasword</label>
+                    </div>
+                  </div>
+                  <div class="center">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+
+                </form>
+              </div>
+
+              <div *ngIf="showEmailForm">
+                <br>
+                <form class="col s12" (ngSubmit)="updateEmail(username, password, newEmail);showEmailForm=false">
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">email</i>
+                      <input id="newemail" name="newEmail" [(ngModel)]="newEmail" type="text" class="validate">
+                      <label for="newemail">New Email</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">vpn_key</i>
+                      <input id="password" name="password" [(ngModel)]="password" type="password" class="validate">
+                      <label for="password">Pasword</label>
+                    </div>
+                  </div>
+                  <div class="center">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+
+                </form>
+              </div>
+
+              <div *ngIf="showPasswordForm">
+                <br>
+                <form class="col s12" (ngSubmit)="updatePassword(username, password, newPassword);showPasswordForm=false">
+                  <div class="row">
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">perm_identity</i>
+                      <input id="old-password" name="password" [(ngModel)]="password" type="password" class="validate">
+                      <label for="old-password">Old Password</label>
+                    </div>
+                    <div class="input-field col s6">
+                      <i class="material-icons prefix">vpn_key</i>
+                      <input id="new-password-confirm" name="newPassword" [(ngModel)]="newPassword" type="password" class="validate">
+                      <label for="new-password-confirm">New Pasword</label>
+                    </div>
+                  </div>
+                  <div class="center">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                      <i class="material-icons right">send</i>
+                    </button>
+                  </div>
+
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  <!-- End of Profile Crad -->
+
+
+</div>
