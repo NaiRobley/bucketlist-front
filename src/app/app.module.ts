@@ -12,6 +12,7 @@ import { AuthComponent } from './auth/auth.component';
 import { ItemComponent } from './item/item.component';
 
 import { AppRoutingModule, routingComponents } from './app.routes';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { AppRoutingModule, routingComponents } from './app.routes';
     HomeComponent,
     AuthComponent,
     routingComponents,
-    ItemComponent
+    ItemComponent,
+    ProfileComponent
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]
