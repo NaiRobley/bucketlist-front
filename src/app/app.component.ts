@@ -24,5 +24,7 @@ export class AppComponent implements OnInit {
   public signOut() {
     localStorage.setItem('access_token', null);
     localStorage.setItem('login_status', '0');
+    localStorage.setItem('current_user', null);
+    localStorage.setItem('email', null);
   }
 }
