@@ -12,13 +12,13 @@
     </form>
 
 <div id="editForm" *ngIf="show==true&&selectedId==item.id">
-  <input class="update" placeholder="Enter the new name for {{item.name}}" autofocus="" [(ngModel)]="name" (keyup.enter)="editItemName(name, item.id, bucketlist.id);show=false;">
+  <input id="editItemNameForm" value={{item.name}} autofocus="" [(ngModel)]="item.name" (keyup.enter)="editItemName(item.name, item.id, bucketlist.id);show=false;">
 </div>
 
 </li>
 
 <div name="newItemForm" *ngIf="showNew==true">
-  <input class="new-bucketlist" placeholder="Add an item" autofocus="" [(ngModel)]="name" (keyup.enter)="addItem(name, bucketlist.id);showNew=false;">
+  <input class="new-bucketlist" placeholder="Add an item" autofocus="" [(ngModel)]="name" (keyup.enter)="addItem(name, bucketlist.id);showNew=false;name=null">
 </div>
 <br>
 <i class="material-icons" style="cursor: pointer" (click)="showNew=!showNew">add</i>
