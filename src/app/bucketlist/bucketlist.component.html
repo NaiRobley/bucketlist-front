@@ -9,7 +9,7 @@
 
         <div class="col l6">
           <!-- Form for New Bucket List -->
-            <form (ngSubmit)="addBucketList()">
+            <form name="newBucketlistForm" (ngSubmit)="addBucketList();newBucketList.name=null">
               <div class="row">
                 <div class="input-field col l8 s10">
                   <i class="material-icons prefix">add_circle</i>
