@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from './api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,19 +13,23 @@ export class AppComponent implements OnInit {
 
   access_token: string = '';
 
-  login_status: string = '';
+  login_status: boolean;
 
-  constructor( private apiService: ApiService ) {}
+  constructor(
+    private apiService: ApiService,
+    private router: Router
+     ) {}
 
   public ngOnInit() {
     this.access_token = localStorage.getItem('access_token');
-    this.login_status = localStorage.getItem('login_status');
+    this.login_status = JSON.parse(localStorage.getItem('login_status'));
   }
 
   public signOut() {
-    localStorage.setItem('access_token', null);
-    localStorage.setItem('login_status', '0');
-    localStorage.setItem('current_user', null);
-    localStorage.setItem('email', null);
+    localStorage.removeItem('access_token');
+    localStorage.setItem('login_status', JSON.stringify(this.login_status = false));
+    localStorage.removeItem('current_user');
+    localStorage.removeItem('email');
+    this.router.navigate(['/auth']);
   }
 }
