@@ -7,8 +7,8 @@
         <a href="/" class="brand-logo">BKT</a>
         <a data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <li> <a href="/auth" *ngIf="login_status==0">Sign In | Register</a> </li>
-          <li> <a href="/auth" *ngIf="login_status==1" (click)="signOut();login_status=0">Sign out</a> </li>
+          <li> <a href="/auth" *ngIf="login_status==false">Login | Register</a> </li>
+          <li> <a href="/auth" *ngIf="login_status==true" (click)="signOut()">Sign out</a> </li>
           <li> <a href="/bucketlists" *ngIf="login_status==1">Bucketlists</a> </li>
           <li> <a href="/profile" *ngIf="login_status==1"> Profile </a> </li>
         </ul>
@@ -16,9 +16,9 @@
     </nav>
   </div>
   <ul class="side-nav" id="mobile-demo">
-    <li> <a href="/auth" *ngIf="login_status==0">Sign In | Register</a> </li>
-    <li> <a href="/auth" *ngIf="login_status==1" (click)="signOut();login_status=0">Sign out</a> </li>
-    <li> <a href="/bucketlists" *ngIf="login_status==1">Bucketlists</a> </li>
+    <li> <a href="/auth" *ngIf="login_status==false">Sign In | Register</a> </li>
+    <li> <a href="/auth" *ngIf="login_status==true" (click)="signOut();login_status=false">Sign out</a> </li>
+    <li> <a href="/bucketlists" *ngIf="login_status==true">Bucketlists</a> </li>
     <li> <a href="/">Home</a> </li>
   </ul>
 <!-- End of Navbar -->
