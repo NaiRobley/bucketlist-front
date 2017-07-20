@@ -22,7 +22,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    if (localStorage.getItem('login_status') == '0') {
+    if (JSON.parse(localStorage.getItem('login_status')) == false) {
       this.router.navigate(['/auth']);
     } else {
       this.username = localStorage.getItem("current_user");
