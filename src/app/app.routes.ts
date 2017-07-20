@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { BucketlistComponent } from './bucketlist/bucketlist.component';
 import { HomeComponent } from './home/home.component';
 import { AuthComponent } from './auth/auth.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'bucketlists', component: BucketlistComponent },
-  { path: 'auth', component: AuthComponent }
+  { path: 'auth', component: AuthComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({
