@@ -1,13 +1,33 @@
 import { TestBed, async } from '@angular/core/testing';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
+
+import { ApiService } from './api.service';
+import { ApiMockService } from './api-mock.service';
+
+import { BucketListService } from './bucketlist/bucket-list.service';
 
 import { AppComponent } from './app.component';
+import { FormsModule } from '@angular/forms';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+    imports: [
+      FormsModule
+    ],
       declarations: [
         AppComponent
       ],
+    providers: [
+      BucketListService,
+      {
+        provide: ApiService,
+        useClass: ApiMockService
+      }
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA
+      ]
     }).compileComponents();
   }));
 
@@ -20,13 +40,13 @@ describe('AppComponent', () => {
   it(`should have as title 'app'`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('app');
+    expect(app.title).toEqual('Your Bucket Lists');
   }));
 
   it('should render title in a h1 tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('h1').textContent).toContain('Welcome to app!!');
+    expect(compiled.querySelector('h1').textContent).toContain('Your Bucket Lists');
   }));
 });

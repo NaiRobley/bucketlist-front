@@ -1,0 +1,24 @@
+
+<li *ngFor="let item of bucketlist.items">
+    <form action="#">
+
+        <input type="checkbox" id="{{item.id}}" [checked]="item.done" (change)="item.done=!item.done" (click)="markItemDone(item.id, bucketlist.id, !item.done)"/>
+        <label for="{{item.id}}" class="black-text">
+          {{item.name}}
+        </label>
+        <i class="material-icons" (click)="removeItem(item, bucketlist.id)" style="float: right; cursor: pointer">delete</i>
+        <i class="material-icons" (click)="show=!show;selectedId=item.id" style="float: right; cursor: pointer">edit</i>
+
+    </form>
+
+<div id="editForm" *ngIf="show==true&&selectedId==item.id">
+  <input id="editItemNameForm" value={{item.name}} autofocus="" [(ngModel)]="item.name" (keyup.enter)="editItemName(item.name, item.id, bucketlist.id);show=false;">
+</div>
+
+</li>
+
+<div name="newItemForm" *ngIf="showNew==true">
+  <input class="new-bucketlist" placeholder="Add an item" autofocus="" [(ngModel)]="name" (keyup.enter)="addItem(name, bucketlist.id);showNew=false;name=null">
+</div>
+<br>
+<i class="material-icons" style="cursor: pointer" (click)="showNew=!showNew">add</i>

@@ -1,0 +1,81 @@
+<div class="container">
+<div class="center">
+  <h2> Welcome to BKT! </h2>
+  <a href="/"> Login </a> or <a href="/"> Register </a> to continue <br><br>
+</div>
+<div class="row">
+  <div class="col s12">
+    <ul class="tabs">
+      <li class="tab col s6"><a href="#loginform">Login</a></li>
+      <li class="tab col s6"><a href="#registerform">Register</a></li>
+    </ul>
+  </div>
+  <!-- Login Form -->
+  <div id="loginform" class="col s12">
+
+    <div class="row">
+      <br>
+      <form class="col s12" (ngSubmit)="login(username, password)">
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">perm_identity</i>
+            <input id="login-username" name="username" [(ngModel)]="username" type="text" class="validate">
+            <label for="login-username">Username</label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">vpn_key</i>
+            <input id="login-password" name="password" [(ngModel)]="password" type="password" class="validate">
+            <label for="login-password">Pasword</label>
+          </div>
+        </div>
+        <div class="center">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+  <!-- End of Login Form -->
+
+  <!-- Register form -->
+  <div id="registerform" class="col s12">
+
+    <div class="row">
+      <br>
+      <form class="col s12" (ngSubmit)="register(username, email, password)">
+        <div class="row">
+          <div class="input-field col s12">
+            <i class="material-icons prefix">email</i>
+            <input id="email" name="email" [(ngModel)]="email" type="email" class="validate">
+            <label for="email">Email</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="input-field col s6">
+            <i class="material-icons prefix">perm_identity</i>
+            <input id="username" name="username" [(ngModel)]="username" type="text" class="validate">
+            <label for="username">Username</label>
+          </div>
+          <div class="input-field col s6">
+            <i class="material-icons prefix">vpn_key</i>
+            <input id="password" name="password" [(ngModel)]="password" type="password" class="validate">
+            <label for="password">Pasword</label>
+          </div>
+        </div>
+        <div class="center">
+          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+            <i class="material-icons right">send</i>
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+  <!-- Enf od register form -->
+</div>
+
+</div>
